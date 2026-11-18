@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects } from '../data/projects';
+---
+<Base title="lezneve" description="small windows software, carefully made: kadr for screenshots, ryad for text.">
+  <section class="hero wrap">
+    <div class="frame">
+      <h1>small software. <em>carefully</em> made.</h1>
+      <p>lezneve makes two small tools for windows. each does one thing, runs only while you use it, and says exactly what it costs.</p>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="work">
+    <h2 id="work" style="position:absolute;left:-999px">projects</h2>
+    <div class="index">
+      {projects.map((p) => (
+        <a class="row frame" href={`/${p.slug}`}>
+          <span class="name">{p.name}</span>
+          <span class="what">{p.line}</span>
+          <span class="meta">v{p.version}<br />windows 10/11</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="split">
+      <h2>what is not in it</h2>
+      <ul class="absent">
+        <li>accounts</li>
+        <li>network access</li>
+        <li>telemetry</li>
+        <li>update checks</li>
+        <li>background services</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="split">
+      <h2>what it costs</h2>
+      <div>
+        <div class="ledger-pair">
+          {projects.map((p) => (
+            <div>
+              <h3>{p.name}</h3>
+              <dl class="ledger" style="margin:0">
+                {p.numbers.slice(0, 3).map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+              </dl>
+            </div>
+          ))}
+        </div>
+        <p class="ledger-note">measured on one machine (windows 11, ryzen 7 8845hs), release builds. these are not guarantees.</p>
+      </div>
+    </div>
+  </section>
+</Base>

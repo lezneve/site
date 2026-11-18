@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects, byslug } from '../data/projects';
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug } }));
+}
+const p = byslug(Astro.params.slug!);
+const other = projects.find((x) => x.slug !== p.slug)!;
+---
+<Base title={`${p.name} — lezneve`} description={p.line}>
+  <section class="p-hero wrap">
+    <h1>{p.name}</h1>
+    <p class="line">{p.line}</p>
+    <p class="lead">{p.lead}</p>
+    <div class="actions">
+      <a class="btn" href={p.releases}>download<small>{p.file}</small></a>
+      <a class="textlink" href={p.repo}>source on github</a>
+    </div>
+    <p class="facts">v{p.version} · windows 10/11 · x64 · mit</p>
+  </section>
+
+  <section class="section wrap">
+    <div class="split">
+      <h2>what it does</h2>
+      <div class="does">
+        {p.does.map((d) => <div><h3>{d.title}</h3><p>{d.text}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="split">
+      <h2>keys</h2>
+      <table class="keys">
+        <tbody>
+          {p.keys.map((k) => (
+            <tr>
+              <td>{k.keys.map((x) => <kbd>{x}</kbd>)}</td>
+              <td>{k.does}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="split">
+      <h2>measured</h2>
+      <div>
+        <dl class="ledger" style="margin:0">
+          {p.numbers.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+        <p class="ledger-note">one machine: windows 11, ryzen 7 8845hs, release build. not a guarantee.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="split">
+      <h2>install, privacy, limits</h2>
+      <div>
+        <div class="block"><h3>install</h3><ul class="plain">{p.install.map((x) => <li>{x}</li>)}</ul></div>
+        <div class="block"><h3>privacy</h3><p class="prose">{p.privacy}</p></div>
+        <div class="block"><h3>not verified, so not claimed</h3><ul class="plain">{p.limits.map((x) => <li>{x}</li>)}</ul></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <a class="next" href={`/${other.slug}`}><span>also by lezneve</span><b>{other.name} →</b></a>
+  </div>
+</Base>
