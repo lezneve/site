@@ -28,7 +28,7 @@ the public site of lezneve, a maker of small windows software: introduces the ma
 - content is taken from each project's README; all numbers come from the projects' measurements (one machine, stated as such).
 - language: english, lowercase where natural.
 - downloads link to github releases (github.com/lezneve/kadr, github.com/lezneve/ryad). both are windows 10/11 x64, MIT.
-- no analytics, no cookies, no third-party requests, self-hosted fonts.
+- analytics: only vercel web analytics on this site (cookieless, first-party script, no personal data). the apps themselves stay free of telemetry. no other cookies, no third-party requests, self-hosted fonts.
 
 ## Brand Commitments
 
